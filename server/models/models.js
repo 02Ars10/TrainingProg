@@ -32,6 +32,7 @@ const Role = sequelize.define('roles',
         field: 'updatedat'
       },
 })
+
 const Group = sequelize.define('groups', 
 {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
@@ -95,9 +96,23 @@ Tasks.belongsTo(Group);
 Tasks.hasMany(Solutions);
 Solutions.belongsTo(Tasks);
 */
+User.hasOne(Role, {foreignKey: 'role_id'});
+User.hasOne(Group, {foreignKey: 'group_id'});
+User.hasMany(Solutions, {foreignKey: 'student_id'});
 
-User.sync();
+Role.belongsTo(User, {foreignKey: 'user_id'});
+
+Group.belongsTo(User, {foreignKey: 'group_id'})
+Group.hasMany(Tasks, {foreignKey: 'group_id'});
+
+Solutions.belongsTo(Tasks, {foreignKey: 'task_id'});
+Solutions.belongsTo(User, {foreignKey: 'student_id'});
+
+Tasks.belongsTo(Group, {foreignKey: 'group_id'});
+Tasks.hasMany(Solutions, {foreignKey: 'task_id'});
+
 Role.sync();
+User.sync();
 module.exports = {
     User,
     Role,
