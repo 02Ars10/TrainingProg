@@ -1,0 +1,27 @@
+.horizontal-flex{
+    display: flex;
+}
+.ouput-panel{
+    min-height: 50%;
+    height: 100%;
+    margin-right: 0;
+    margin-left: 0;
+    background-color: #3c3c3c;
+    border-bottom: #303030 3px solid;
+    padding: 10px;
+    overflow-y:scroll;
+}
+.ouput-panel > div{
+    font-family: monospace;
+}
+.output-wrapper{
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    color: antiquewhite;
+    padding: 10px;
+    overflow: hidden;
+    background-color: #3c3c3c;
+    margin-left: -1px;
+}

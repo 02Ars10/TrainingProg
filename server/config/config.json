@@ -1,0 +1,20 @@
+{
+  "development": {
+    "username": "pgadmin",
+    "password": "pgadmin",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "pgadmin",
+    "password": "pgadmin",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "pgadmin",
+    "password": "pgadmin",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}

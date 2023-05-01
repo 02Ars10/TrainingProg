@@ -1,0 +1,347 @@
+.body {
+    font-family: Roboto,sans-serif;
+    background: #fff;
+    font-size: 20px;
+    line-height: 1.5em;
+    -webkit-font-smoothing: antialiased;
+    min-width: 1000px;
+    overflow-x: hidden;
+    	/* Light mode */
+	background-color: var(--page-bg);
+	color: var(--text-color);
+}
+.hero {
+    padding: 4% 6% 4.5em;
+}
+.hero__title {
+   
+    margin: 0.5em 0 0;
+
+}
+.title__text {
+    
+    font-family: 'Rubik One', sans-serif;
+    text-transform: uppercase;
+   font-weight: 300;
+   font-size: 9em;
+   line-height: 1em;
+    color: #4c62ba;
+    transition: font-size .2s;
+    text-align: left;
+    background-size: 200%; 
+    transition: all .2s ease;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: a 10s ease infinite;
+    
+}
+@keyframes a {
+    0% {
+        background: linear-gradient(90deg,#4c62ba,#65b9c1,#4c62ba);
+    background-size: 200%;
+    background-position: 0 50%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    }
+    50% {
+        background: linear-gradient(90deg,#4c62ba,#65b9c1,#4c62ba);
+    background-size: 200%;
+    background-position: 100% 50%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    }
+    100% {
+        background: linear-gradient(90deg,#4c62ba,#65b9c1,#4c62ba);
+        background-size: 200%;
+        background-position: 200% 50%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+}
+.hero__subtitle {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.75em;
+    line-height: 1.2em;
+    margin: 0 0 0.75em;
+    text-transform: none;
+}
+.visualisator {
+    margin: 25px 0  ;
+    width: 800px;
+    height: 252px;
+    background: url(../assets/compileer.jpg) no-repeat;
+    border-radius: 3px;
+    border: 1px solid rgba(0,0,0,.2);
+}
+.advantages {
+    display: flex;
+    clear: both;
+    margin: 2em 0 0;
+}
+.advantages__item{
+    padding: 0 3% 0 0;
+    width: 33%;
+    line-height: 1.5em;
+}
+.advantages__title{
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: .5px;
+    font-size: 1.1em;
+    margin: 0.3em 0;
+    font-size: 20px;
+}
+.advantages__text{
+    font-size: 20px;
+    line-height: 1.5em;
+}
+.feature {
+    padding: 2.5em 0 5em;
+}
+.feature__why {
+    background: url(../assets/mars.jpg) no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    color: #fff;
+}
+.title {
+    font-family: Roboto Condensed;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin: 0.5em 6%;
+    font-size: 2em;
+    text-transform: uppercase;
+    line-height: 1.5em;
+}
+.text__feature {
+    margin: 0.25em 6% 1.5em;
+    font-size: 1.75em;
+    line-height: 1.2em;
+    -webkit-box-flex: 2;
+    -ms-flex: 2;
+    flex: 2;
+    float: left;
+    max-width: 65%
+}
+.columns {
+    display: flex;
+    clear: both;
+    padding: 0 6%
+}
+.column {
+    padding: 0 3% 0 0;
+    max-width: 700px;
+    min-width: 400px;
+    font-style: 1em;
+    line-height: 1.5em;
+}
+.column__header {
+    font-family: Roboto Condensed;
+    text-transform: uppercase;
+    font-weight: 400;
+    letter-spacing: .5px;
+    font-size: 1.1em;
+    margin: 0.3em 0;
+}
+.column__text {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    -webkit-text-size-adjust: none;
+    -ms-text-size-adjust: none;
+    text-size-adjust: none;
+}
+.about {
+    padding: 4.5em 0 6em;
+    background: #4c62ba;
+     background: -webkit-linear-gradient(left,#4c62ba,#65b9c1); 
+     background: linear-gradient(90deg,#4c62ba,#65b9c1); 
+    -webkit-animation: b 20s ease infinite;
+    animation: b 20s ease infinite;
+    color: #fff;
+    background-size: 600%;
+}
+@keyframes b {
+    0% {
+        background: linear-gradient(90deg,#4c62ba,#65b9c1,#4c62ba);
+        background-size: 1000%;
+        background-position: 0 50%;
+    }
+    50% {
+        background: linear-gradient(90deg,#4c62ba,#65b9c1,#4c62ba);
+        background-size: 1000%;
+        background-position: 100% 50%;
+    }
+    100% {
+        background: linear-gradient(90deg,#4c62ba,#65b9c1,#4c62ba);
+    background-size: 1000%;
+    background-position: 0 50%;
+    }
+}
+.lessons {
+    width: 100%;
+    overflow-x: hidden;
+    opacity: .6;
+    margin: 0 0 3.25em;
+    cursor: default;
+    user-select: none;
+    
+}
+.lessons__wrap {
+    width: 30000px;
+    position: relative;
+    animation: move 10s infinite;
+}
+@keyframes move {
+ 30% {   
+    transform: translate(-3000px, 0);
+}
+
+
+100% {
+  transform: translate(-3000px, 0);
+}
+}
+
+.lessons__topic {
+    float: left;
+    width: 180px;
+    text-align: center;
+    font-weight: 700;
+    font-family: Roboto Condensed;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.topic__img {
+    height: 100px;
+    width: auto;
+    margin-bottom: 0.75em;
+}
+.topic__text {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+.title__about {
+ 
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin: 0.5em 6%;
+    font-size: 2em;
+    align-items: center;
+    text-transform: uppercase;
+    text-align: center;
+}
+.about__text {
+    text-align: center;
+    font-size: 1.75em;
+    line-height: 1.2em;
+    max-width: 800px;
+    margin: 0.75em auto 0;
+}
+.parallax {
+   min-height: 100vh;
+   position: relative;
+   overflow: hidden;
+}
+._container {
+    max-width: 1000px;
+    margin: 0px auto;
+    padding: 50px 20px;
+}
+.parallax__body {
+
+width: 100%;
+height: 100%;
+top: 0;
+left: 0;
+}
+.parallax__container {
+text-transform: uppercase;
+position: relative;
+z-index: 2;
+}
+.parallax__label {
+color: #fbd784;
+display: flex;
+font-size: 18px;
+letter-spacing: 6px;
+align-items: center;
+margin: 0px 0px 30px 0px;
+}
+.parallax__label::before {
+    flex: 0 0 70px;
+    content: "";
+    margin: 0px 0px 30px 0px;
+    background-color: #fbd784;
+    height: 1px;
+}
+.parallax__title {
+font-size: 30px;
+}
+.parallax__button {
+    display: block;
+    max-width: 300px;
+    padding: 14px 20px;
+    border-radius: 5px;
+    background: #ef514d;
+    color: #fff;
+    font-size: 1.25em;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+}
+.parallax__button:hover {
+    background-color: #f93;
+    transition: none;
+}
+.parallax__images {
+position: absolute;
+width: 120%;
+height: 120%;
+top: -10%;
+left: -10%;
+z-index: 1;
+}
+
+.images-parallax__item {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+}
+:root {
+    --posX: 0;
+    --posY: 0;
+}
+.images-parallax__clouds,
+.images-parallax__mountains,
+.images-parallax__human {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    
+}
+.images-parallax__clouds {
+    background: url('../assets/clouds.jpg') top / cover;
+    top: 0;
+    transform: translate(calc(var(--posX)* 1px), calc(var(--posY) * 1px));
+}
+.images-parallax__mountains {
+    background: url('../assets/mountains.png') top / cover;
+    top: 15%;
+    z-index: 2;
+    transform: translate(calc(var(--posX)*5px), calc(var(--posY) * .2px));
+}
+    .images-parallax__human {
+    background: url('../assets/human.png') top / cover;
+   top: 45%;
+    z-index: 3;
+    transform: translate(calc(var(--posX)* 10px), calc(var(--posY) * 5px));
+}
+@media (max-aspect-ratio: 3/2) {
+    .images-parallax__human {
+        background-position: 20% top;
+    }
+}

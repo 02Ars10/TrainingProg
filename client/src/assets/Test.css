@@ -1,0 +1,149 @@
+::-webkit-scrollbar {
+    width: 10px;
+  }
+::-webkit-scrollbar-track {
+    background-color: #fff;
+  }
+::-webkit-scrollbar-thumb {
+    background-color: black;
+    border-radius: 8px;
+    border: solid 2px #fff;
+  } 
+.body2 {
+	background-color: black;
+	color: #EFEFEF;
+	font-family: Roboto,sans-serif;
+	font-size: 20px;
+	line-height: 1.5em;
+	-webkit-font-smoothing: antialiased;
+	padding-top: 20px;
+}
+
+.extra {
+	width: 50%;
+	padding: 10px;
+	margin: 20px auto;
+	display: flex;
+	font-size: 30px;
+	background-color: #9a9696;
+	justify-content: center;
+	align-items: flex-start;
+	border-radius: 10px;
+	flex-direction: column;
+	box-shadow: 0 0 5px white;
+}
+
+.exer {
+	width: 100%;
+	display: flex;
+	gap: 20px;
+	justify-content: center;
+	padding: 20px 30px;
+	flex-wrap: wrap;
+	position: relative;
+}
+.task {
+	width: 50%;
+}
+.task > p {
+	background-color: #171718;
+	padding: 20px;
+	border-radius: 5px;
+	color: #EFEFEF;
+}
+.solution {
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+}
+.solution > textarea {
+	padding: 10px 15px;
+	background-color: transparent;
+	border-radius: 5px;
+	border: solid 2px #EFEFEF;
+	color: forestgreen;
+}
+.body2 > img {
+	filter: contrast(0.5);
+    position: absolute;
+    z-index: 0;
+    top: 200px;
+	opacity: 0.5;
+}
+.code_count {
+	width: 10px;
+	margin-top: -310px;
+    margin-left: -20px;
+	color: #9a9696;
+	
+}
+.solution > button {
+	margin-top: 100px;
+	margin: 170px auto;
+	width: 250px;
+	height: 60px;
+	background-color: transparent;
+	border-radius: 10px;
+	border: solid 1px #EFEFEF;
+	color: #EFEFEF;
+	transition: .5s all;
+}
+.solution > button:hover {
+	background-color: #EFEFEF;
+	color: black;
+}
+
+.direction {
+	width: 100%;
+	display: flex;
+	gap: 50px;
+	justify-content: center;
+	margin-top: 30px;
+}
+
+.sign1 {
+	border: solid white;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+	transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+	margin-bottom: 2px;
+}
+.sign2 {
+	border: solid white;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+	transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+	margin-bottom: 2px;
+}
+@media (max-width: 850px) {
+	.extra, .task, .solution {
+		width: 90%;
+	}
+	p {
+		font-size: 20px;
+	}
+	.body2 > img {
+		max-width: 95%;
+	}
+}
+@media (max-width: 450px) {
+	.extra, .task, .solution {
+		width: 98%;
+	}
+	textarea {
+		height: 200px;
+	}
+	.code_count {
+		width: 10px;
+		margin-top: -187px;
+		margin-left: -20px;
+	}
+	.task > p {
+		font-size: 17px;
+		padding: 5px;
+	}
+}
