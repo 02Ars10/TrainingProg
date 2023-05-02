@@ -90,7 +90,7 @@ const Tasks = () => {
                                 onClick={() => deleteHandler(item.id)}>
                                 Удалить
                             </Button>
-                            <h5>Задание №{index + 1} для группы {groups.find(el => el.id === item.group_id)?.name}</h5>
+                            <h5>Задача №{index + 1} для группы {groups.find(el => el.id === item.group_id)?.name}</h5>
                             <div>{item.description}</div>
                             {item?.inputs?.map((inp, ind) => {
                                 return (

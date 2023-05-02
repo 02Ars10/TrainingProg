@@ -130,13 +130,13 @@ const Solutions = observer(() => {
         
         <div className="w-75 m-auto">
           <ListGroup>
-           
+          [{current_user.avg_grade}]
 
               {solutions?.map((item, index) => {
             
                   return(
                     <ListGroupItem className="solutions" key={item.id}>
-                          <h5>Задание №{index + 1}</h5>
+                          <h5>Задание №{item.task_id}</h5>
                           <div>Решение:</div>
                           <div className="border mt-2">
                             <div className="m-2">Code: <br/></div>
