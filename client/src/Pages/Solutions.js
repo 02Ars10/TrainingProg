@@ -37,6 +37,7 @@ const Solutions = observer(() => {
     }  
 
     const [currentUser, setCurrentUser] = useState(checkUser(user))
+    const [current_user, set_current_user] = useState([]) 
     const [solutions, setSolutions] = useState([])
     const [tasks, setTasks] = useState([])
     const [groups, setGroups] = useState([])
@@ -47,7 +48,10 @@ const Solutions = observer(() => {
         getSolutionByUser(currentUser).then(data => {
             setSolutions(data)
         })
-        
+        get_user_by_id(currentUser).then(data => {
+          set_current_user(data)
+          
+        })
         if (checkRole(user) === 'USER') {
           getTasksByGroup(checkGroup(user)).then(data => {
             setTasks(data)
@@ -74,7 +78,10 @@ const Solutions = observer(() => {
       getTasksByGroup(group).then(data => {
         setTasks(data)
       })
-
+      get_user_by_id(currentUser).then(data => {
+        set_current_user(data)
+        
+      })
       getSolutionByUser(currentUser).then(data => {
         setSolutions(data)
         
