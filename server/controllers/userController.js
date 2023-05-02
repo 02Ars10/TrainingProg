@@ -88,12 +88,11 @@ class UserController {
   `,
   {
     replacements: { user_id: user_id },
+    plain: true,
     type: QueryTypes.SELECT
   }
 );
-console.info('!!!!!!');
-console.info(users);
-console.info('!!!!!!');
+
 return res.json({ users }); //В ответе вернуть результат запроса
         
     }

@@ -47,7 +47,10 @@ const Solutions = observer(() => {
     useEffect(() => {
         getSolutionByUser(currentUser).then(data => {
             setSolutions(data)
+          
         })
+        
+
         get_user_by_id(currentUser).then(data => {
           set_current_user(data)
           
@@ -130,8 +133,7 @@ const Solutions = observer(() => {
         
         <div className="w-75 m-auto">
           <ListGroup>
-           [{current_user.email}]]
-
+          [{current_user.email}]
 
               {solutions?.map((item, index) => {
             
