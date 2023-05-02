@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { getSolutionByUser, updateSolution } from "../http/solutionsApi";
-import { get_user_by_id } from "../http/userApi";
+// import { get_user_by_id } from "../http/userApi";
 import { observer } from "mobx-react-lite";
 import { Context } from "../index";
 import { Accordion, Button, Form, ListGroup, ListGroupItem } from "react-bootstrap";
@@ -37,7 +37,7 @@ const Solutions = observer(() => {
     }  
 
     const [currentUser, setCurrentUser] = useState(checkUser(user))
-    const [current_user, set_current_user] = useState([]) 
+    // const [current_user, set_current_user] = useState([]) 
     const [solutions, setSolutions] = useState([])
     const [tasks, setTasks] = useState([])
     const [groups, setGroups] = useState([])
@@ -48,10 +48,10 @@ const Solutions = observer(() => {
         getSolutionByUser(currentUser).then(data => {
             setSolutions(data)
         })
-        get_user_by_id(currentUser).then(data => {
-          set_current_user(data)
+        // get_user_by_id(currentUser).then(data => {
+        //   set_current_user(data)
           
-        })
+        // })
         if (checkRole(user) === 'USER') {
           getTasksByGroup(checkGroup(user)).then(data => {
             setTasks(data)
@@ -78,10 +78,10 @@ const Solutions = observer(() => {
       getTasksByGroup(group).then(data => {
         setTasks(data)
       })
-      get_user_by_id(currentUser).then(data => {
-        set_current_user(data)
+      // get_user_by_id(currentUser).then(data => {
+      //   set_current_user(data)
         
-      })
+      // })
       getSolutionByUser(currentUser).then(data => {
         setSolutions(data)
         
@@ -130,14 +130,14 @@ const Solutions = observer(() => {
         
         <div className="w-75 m-auto">
           <ListGroup>
-          [[{currentUser}] [{current_user}]]
+          {/* [[{currentUser}] [{current_user}]] */}
 
 
               {solutions?.map((item, index) => {
             
                   return(
                     <ListGroupItem className="solutions" key={item.id}>
-                         <h5>Задача №{item.task_id}  {item.avg_grade}</h5> 
+                         <h5>Задача №{item.task_id}</h5> 
                           <div>Решение:</div>
                           <div className="border mt-2">
                             <div className="m-2">Code: <br/></div>

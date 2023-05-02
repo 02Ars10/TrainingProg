@@ -75,16 +75,16 @@ class UserController {
 
       }
       async get_user_by_id(req, res, next) { //Функция для получения решения по student_id
-        try {
+      
             const user_id = req.params.user_id //Получаем id через параметры запроса 
             const users = await sequelize.query(
   `SELECT 
       * 
-      ,(select avg(grade) from solutions where student_id = "user".id) as avg_grade
+      ,(select avg(grade) from solutions where student_id = "users".id) as avg_grade
     FROM 
-      "user"
+      "users"
     WHERE 
-      "user".id = :user_id 
+      "users".id = :user_id 
   `,
   {
     replacements: { user_id: user_id },
@@ -93,9 +93,7 @@ class UserController {
 );
 
             return res.json(users) //В ответе вернуть результат запроса
-        } catch (e) {
-            next(ApiError.badRequest(e.message)) //В случае ошибки выводим эту ошибку
-        }
+        
     }
       async getAll(req, res, next) { 
     
