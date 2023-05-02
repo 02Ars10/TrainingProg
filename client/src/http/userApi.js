@@ -22,7 +22,7 @@ export const check = async () => {
 }
 
 export const get_user_by_id = async (user_id) => {
-    const {data} = await $authHost.post(`users/by_id/${user_id}`)
+    const {data} = await $authHost.post(`user/by_id/${user_id}`)
     return data
 }
 export const addTeacher = async (email, password) => {
