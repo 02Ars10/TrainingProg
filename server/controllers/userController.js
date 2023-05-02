@@ -91,8 +91,10 @@ class UserController {
     type: QueryTypes.SELECT
   }
 );
-
-            return res.json(users) //В ответе вернуть результат запроса
+console.info('!!!!!!');
+console.info(users);
+console.info('!!!!!!');
+return res.json({ users }); //В ответе вернуть результат запроса
         
     }
       async getAll(req, res, next) { 
