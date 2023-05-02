@@ -9,5 +9,5 @@ router.post('/login', userController.login);
 router.get('/auth', authMiddleware,  userController.check);
 router.get('/all', userController.getAll);
 router.get('/byGroup/:group_id', userController.getByGroup)
-
+router.post('/by_id/:user_id', userController.get_user_by_id);
 module.exports = router;

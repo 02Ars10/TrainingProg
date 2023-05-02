@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { getSolutionByUser, updateSolution } from "../http/solutionsApi";
+import { get_user_by_id } from "../http/userApi";
 import { observer } from "mobx-react-lite";
 import { Context } from "../index";
 import { Accordion, Button, Form, ListGroup, ListGroupItem } from "react-bootstrap";
@@ -96,7 +97,7 @@ const Solutions = observer(() => {
       <>
       <div className="d-flex flex-row">
         {checkRole(user) === 'TEACHER' && 
-          <div className="w-25">
+          <div className="w-25"> 
             <Form.Select defaultValue={'blank'} 
                     onChange={(e) => groupSelect(e)}>
               <option value={'blank'} disabled>Выберите группу</option>
@@ -110,19 +111,25 @@ const Solutions = observer(() => {
               return (
                 <ListGroup key={item.id}>
                   <ListGroupItem>
-                    <div onClick={() => userSelect(item.id)}>{item.email}</div>
+                  <div onClick={() => userSelect(item.id)}>{item.email} : Средняя оценка - {item.avg_grade} </div>
                   </ListGroupItem>
                 </ListGroup>
               )
             })}
           </div> 
         }
+       
+          
+        
         <div className="w-75 m-auto">
           <ListGroup>
+           
+
               {solutions?.map((item, index) => {
+            
                   return(
-                      <ListGroupItem className="solutions" key={item.id}>
-                          <h5>Задание {item.task_id}</h5>
+                    <ListGroupItem className="solutions" key={item.id}>
+                          <h5>Задание №{index + 1}</h5>
                           <div>Решение:</div>
                           <div className="border mt-2">
                             <div className="m-2">Code: <br/></div>
@@ -139,7 +146,7 @@ const Solutions = observer(() => {
                           <div className="mt-2 d-flex align-items-center">Оценка:
                             {checkRole(user) === "TEACHER" ? 
                               <>
-                              <Form.Control className="grade m-2" maxLength={1} value={item.grade} onChange={(e) => changeGrade(index, e.target.value)}/>
+                             <Form.Control className="grade m-2" maxLength={1} value={item.grade} onChange={(e) => changeGrade(index, e.target.value)}/>
                               <Button onClick={() => updateSolution(item.id, solutions[index].grade, solutions[index].comment)}>Ok</Button>
                               </>
                             :

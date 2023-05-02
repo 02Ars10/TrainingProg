@@ -10,11 +10,11 @@ const User = sequelize.define('user',
     role_id: {type:  DataTypes.INTEGER, defaultValue: roles.USER}, // USER ADMIN TEACHER
     group_id:{type: DataTypes.INTEGER },
     createdAt: {
-        type: Sequelize.DATEONLY,
+        type: Sequelize.DataTypes.DATE,
         field: 'createdat',
       },
       updatedAt: {
-        type: Sequelize.DATEONLY,
+        type: Sequelize.DataTypes.DATE,
         field: 'updatedat'
       },
 })
@@ -22,13 +22,13 @@ const User = sequelize.define('user',
 const Role = sequelize.define('roles', 
 {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    role_name: {type:  DataTypes.STRING, defaultValue: 'USER'}, // USER ADMIN TEACHER
+    role_name: {type:  DataTypes.STRING(1024), defaultValue: 'USER'}, // USER ADMIN TEACHER
     createdAt: {
-        type: Sequelize.DATEONLY,
+        type: Sequelize.DataTypes.DATE,
         field: 'createdat',
       },
       updatedAt: {
-        type: Sequelize.DATEONLY,
+        type: Sequelize.DataTypes.DATE,
         field: 'updatedat'
       },
 })
@@ -38,11 +38,11 @@ const Group = sequelize.define('groups',
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     name:{type:  DataTypes.STRING, unique:true},
     createdAt: {
-        type: Sequelize.DATEONLY,
+        type: Sequelize.DataTypes.DATE,
         field: 'createdat',
       },
       updatedAt: {
-        type: Sequelize.DATEONLY,
+        type: Sequelize.DataTypes.DATE,
         field: 'updatedat'
       },
 })
@@ -55,11 +55,11 @@ const Tasks = sequelize.define('tasks',
     inputs: {type: DataTypes.ARRAY(DataTypes.TEXT)}, // [[1, 2, 2], [abc]]
     outputs: {type: DataTypes.ARRAY(DataTypes.TEXT)},// [[2, 4, 4], [aabbcc]]
     createdAt: {
-        type: Sequelize.DATEONLY,
+        type: Sequelize.DataTypes.DATE,
         field: 'createdat',
       },
       updatedAt: {
-        type: Sequelize.DATEONLY,
+        type: Sequelize.DataTypes.DATE,
         field: 'updatedat'
       },
 })
@@ -76,11 +76,11 @@ const Solutions = sequelize.define('solutions',
     grade: {type: DataTypes.INTEGER },
     comment: {type: DataTypes.TEXT},
     createdAt: {
-        type: Sequelize.DATEONLY,
+        type: Sequelize.DataTypes.DATE,
         field: 'createdat',
       },
       updatedAt: {
-        type: Sequelize.DATEONLY,
+        type: Sequelize.DataTypes.DATE,
         field: 'updatedat'
       },
 })

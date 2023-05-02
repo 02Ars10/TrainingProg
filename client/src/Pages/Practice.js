@@ -177,10 +177,10 @@ const Practice = observer(() => {
     </div>
       
     <button onClick={()=>{sendCode(value)}}  className='btn btn-dark'>
-      Send code
+      Проверить код
     </button>
     <button onClick={()=>{sendAnswer(value)}}  className='btn btn-dark'>
-      Send answer to teacher
+      Отправить решение преподавателю
     </button>
     <input
     type="text"

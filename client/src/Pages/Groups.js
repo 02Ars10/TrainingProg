@@ -50,7 +50,7 @@ export default function Groups() {
                     </Modal.Header>
                     <Modal.Body>
                         <Form.Group className="mb-3" name="group_name" >
-                            <Form.Label name="group_name">Введдите название группы</Form.Label>
+                            <Form.Label name="group_name">Введите название группы</Form.Label>
                             <Form.Control type="text" placeholder="Группа" name="group_name"/>
                         </Form.Group>
 

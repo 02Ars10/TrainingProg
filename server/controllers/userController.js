@@ -1,3 +1,6 @@
+const sequelize = require('../db')
+const {QueryTypes } = require('sequelize');
+
 const ApiError = require('../error/ApiError')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
@@ -71,7 +74,29 @@ class UserController {
         }
 
       }
+      async get_user_by_id(req, res, next) { //Функция для получения решения по student_id
+        try {
+            const user_id = req.params.user_id //Получаем id через параметры запроса 
+            const users = await sequelize.query(
+  `SELECT 
+      * 
+      ,(select avg(grade) from solutions where student_id = "user".id) as avg_grade
+    FROM 
+      "user"
+    WHERE 
+      "user".id = :user_id 
+  `,
+  {
+    replacements: { user_id: user_id },
+    type: QueryTypes.SELECT
+  }
+);
 
+            return res.json(users) //В ответе вернуть результат запроса
+        } catch (e) {
+            next(ApiError.badRequest(e.message)) //В случае ошибки выводим эту ошибку
+        }
+    }
       async getAll(req, res, next) { 
     
         const users = await User.findAll({ where: { role_id:  roles.USER} }, {order: [
@@ -83,12 +108,28 @@ class UserController {
         return res.json({ users });
       }
 
-
+     
       async getByGroup(req, res, next) { //Функция для поиска пользователя по его group_id
         const group_id = req.params.group_id //Получаем id через параметры запроса
-        const users = await User.findAll({ where: { group_id: group_id } }, {order: [ //Sql запрос в базе данных 'найти всех пользователей у которых нужный нам group_id остортировать по id'
-          ['id', 'DESC']
-      ]},).catch(()=>{});
+      //   const users = await User.findAll({ where: { group_id: group_id } }, {order: [ //Sql запрос в базе данных 'найти всех пользователей у которых нужный нам group_id остортировать по id'
+      //     ['id', 'DESC']
+      // ]},).catch(()=>{});
+      const users = await sequelize.query(
+        `SELECT 
+            * 
+            ,(select round(avg(grade),2) from solutions where student_id = "users".id) as avg_grade
+          FROM 
+            "users" 
+          WHERE 
+            group_id = :group_id 
+          order by 
+            "users".email desc
+        `,
+        {
+          replacements: { group_id: group_id },
+          type: QueryTypes.SELECT
+        }
+      );
 
         console.info('dxxxxxxxzxzzx');
 
