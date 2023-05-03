@@ -14,18 +14,8 @@ const generateJwt = (id, email, role, group) => {
     });
   };
 class UserController {
-   async checkUserByEmail(req, res)  {
-    const { email } = req.params;
-    try {
-      const user = await User.findOne({ email });
-      res.json({ exists: !!user });
-    } catch (e) {
-      console.log(e);
-      res.status(500).json({ message: 'Ошибка сервера' });
-    }
-  }
     async registration(req, res, next) { //Регистрация пользователя
-        const { email, password } = req.body;
+      const { email, password, password_2 } = req.body;
 
         if (!email || !password) {
           return next(ApiError.badRequest('Некорренктный email или password'));
@@ -39,7 +29,7 @@ class UserController {
         }
         const hashPassword = await bcrypt.hash(password, 5); //Шифрование пароля
         
-        console.info('dxxxxxxxzxzzx');
+     
         const user = await User.create({ email, password: hashPassword }); //Создание пользователя
         const token = generateJwt(user.id, user.email, "USER"); //Шифрование его данных
         return res.json({ token, role: "USER"});
@@ -47,7 +37,13 @@ class UserController {
     
       async login(req, res, next) { //Авторизация
         const { email, password } = req.body;
+        console.info('login');
+
+
         const user = await User.findOne({ where: { email } }).catch(()=>{}); //Поиск пользователя по email
+        if (!user) {
+          return next(ApiError.internal('Пользователь с таким email не найден'));
+}
         let role;
         try {
           role = await Role.findOne({where:{id: user.dataValues.role_id}}) //Поиск роли пользователя
@@ -141,7 +137,7 @@ return res.json({ users }); //В ответе вернуть результат 
         }
       );
 
-        console.info('dxxxxxxxzxzzx');
+      
 
         return res.json({ users });
       }

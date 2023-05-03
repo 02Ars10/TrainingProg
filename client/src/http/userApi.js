@@ -1,15 +1,7 @@
 import {$authHost, $host} from "./index";
 import jwt_decode from "jwt-decode";
-import axios from "axios";
 
-export const checkUserByEmail = async (email) => {
-    try {
-        const response = await axios.get('user/check/${email}`');
-        return response.data;
-    } catch (e) {
-        console.log(e);
-    }
-};
+
 export const registration = async (email, password) => {
     const {data} = await $host.post('user/registration', {email, password})
     localStorage.setItem('token', data.token)
