@@ -1,19 +1,9 @@
 
-// import {Container, Form, Card, Button} from 'react-bootstrap'
-// import { LOGIN_ROUTE, REGISTRATION_ROUTE, HOME_ROUTE } from '../utils/consts'
-// import { NavLink, useLocation, useNavigate } from "react-router-dom";
-// import React, { useContext, useEffect, useState } from 'react';
-// import {registration, login} from '../http/userApi'
-// import { observer } from 'mobx-react-lite';
-// import {Context} from '../index'
-
-
-
 import React, {useContext, useState} from 'react';
-import {Container, Form, Card, Button} from 'react-bootstrap'
+import {Container, Form, Card, Button, Alert} from 'react-bootstrap'
 import {NavLink, useLocation, useNavigate} from "react-router-dom";
 import {LOGIN_ROUTE, REGISTRATION_ROUTE, HOME_ROUTE} from "../utils/consts";
-import {registration, login} from '../http/userApi'
+import {registration, login, checkUserByEmail} from '../http/userApi'
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
 
@@ -24,9 +14,29 @@ const Auth = observer(() => {
     const isLogin = location.pathname === LOGIN_ROUTE
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-
+    const [error, setError] = useState('')
     const click = async () => {
         try {
+            setError("") // Clear previous error messages
+            if (!email || !password) {
+                setError("Пожалуйста, заполните все поля")
+                return;
+            }
+    
+            if (!/\S+@\S+\.\S+/.test(email)) {
+                setError("Пожалуйста, введите корректный email")
+                return;
+            }
+    
+            if (password.length < 6) {
+                setError("Пароль должен содержать не менее 6 символов")
+                return;
+            }
+            const userData = await checkUserByEmail(email);
+            if (!userData) {
+                setError("Пользователь с таким email не найден");
+                return;
+            }
             let data;
             if (isLogin) {
                 data = await login(email, password);
@@ -35,11 +45,16 @@ const Auth = observer(() => {
             }
             user.setUser(data)
             user.setIsAuth(true)
-         history(HOME_ROUTE)
+            history(HOME_ROUTE)
         } catch (e) {
-            alert(e.response.data.message)
+            if (e.response && e.response.status === 401) {
+                setError("Неправильный логин или пароль");
+            } else if (e.response && e.response.data) {
+                setError(e.response.data.message || "Неправильный логин или пароль");
+            } else {
+                setError("Неправильный логин или пароль");
+            }
         }
-
     }
 
     return (
@@ -63,6 +78,7 @@ const Auth = observer(() => {
                         onChange={e => setPassword(e.target.value)}
                         type="password"
                     />
+                    {error && <Alert variant="danger" className="mt-3">{error}</Alert>}
                     <Form className="d-flex justify-content-between mt-3 pl-3 pr-3">
                         {isLogin ?
                             <div>

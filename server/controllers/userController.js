@@ -14,6 +14,16 @@ const generateJwt = (id, email, role, group) => {
     });
   };
 class UserController {
+   async checkUserByEmail(req, res)  {
+    const { email } = req.params;
+    try {
+      const user = await User.findOne({ email });
+      res.json({ exists: !!user });
+    } catch (e) {
+      console.log(e);
+      res.status(500).json({ message: 'Ошибка сервера' });
+    }
+  }
     async registration(req, res, next) { //Регистрация пользователя
         const { email, password } = req.body;
 
@@ -67,6 +77,7 @@ class UserController {
           const user = await User.findOne({ where: { email } }).catch(()=>{});
           const role = await Role.findOne({where:{id: user.dataValues.role_id}})
           const token = generateJwt(req.user.id, req.user.email, role.role_name);
+          
           return res.json({ token });
         } catch (error) {
           return res.json({ error });
