@@ -52,7 +52,7 @@ const Solutions = observer(() => {
         
 
         get_user_by_id(currentUser).then(data => {
-          set_current_user(data)
+          set_current_user(data.users.avg_grade)
           
         })
         if (checkRole(user) === 'USER') {
@@ -133,7 +133,8 @@ const Solutions = observer(() => {
         
         <div className="w-75 m-auto">
           <ListGroup>
-          [{current_user.email}]
+          { (current_user) && <p>Средняя оценка: {current_user}</p> }
+
 
               {solutions?.map((item, index) => {
             

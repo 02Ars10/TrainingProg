@@ -80,7 +80,7 @@ class UserController {
             const users = await sequelize.query(
   `SELECT 
       * 
-      ,(select avg(grade) from solutions where student_id = "users".id) as avg_grade
+      ,(select round(avg(grade),2) from solutions where student_id = "users".id) as avg_grade
     FROM 
       "users"
     WHERE 
