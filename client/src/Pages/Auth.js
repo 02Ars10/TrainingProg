@@ -31,7 +31,7 @@ const Auth = observer(() => {
         const weakPassword= weakRegExp.test(passwordValue);
         const strongPassword= strongRegExp.test(passwordValue);
         const whiteSpace= whitespaceRegExp.test(passwordValue);
-    
+
         if(passwordValue===''){
             setPasswordErr("Password is Empty");
         }else{
@@ -120,6 +120,18 @@ const Auth = observer(() => {
    value={email}
    onChange={e => setEmail(e.target.value)}
 />
+{ isLogin ? 
+
+<Form.Control
+   className="mt-3"
+   placeholder="Введите ваш пароль..."
+   value={password}
+   onChange={e => setPassword(e.target.value)}
+   type="password"
+/>
+
+:
+
 <Form.Control
    className="mt-3"
    placeholder="Введите ваш пароль..."
@@ -128,22 +140,23 @@ const Auth = observer(() => {
    onChange={e => setPassword(e.target.value)}
    type="password"
 />
- { isLogin ? 
+ 
+}
+{ isLogin ? 
 
 <div></div>
 
- :
+:
 
- <Form.Control
-    className="mt-3"
-    placeholder="Повторите ваш пароль..."
-    value={password_2}
-    onChange={e => setPassword_2(e.target.value)}
-    type="password"
- />
- 
- }
+<Form.Control
+   className="mt-3"
+   placeholder="Повторите ваш пароль..."
+   value={password_2}
+   onChange={e => setPassword_2(e.target.value)}
+   type="password"
+/>
 
+}
 
                     {error && <Alert variant="danger" className="mt-3">{error}</Alert>}
                     <Form className="d-flex justify-content-between mt-3 pl-3 pr-3">
