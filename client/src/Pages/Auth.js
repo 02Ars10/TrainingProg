@@ -6,7 +6,7 @@ import {LOGIN_ROUTE, REGISTRATION_ROUTE, HOME_ROUTE} from "../utils/consts";
 import {registration, login} from '../http/userApi'
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
-import {StrengthMeter} from "../utils/StrengthMeter";
+
 const Auth = observer(() => {
     const {user} = useContext(Context)
     const location = useLocation()
@@ -64,7 +64,21 @@ const Auth = observer(() => {
             }
         }
     }
-    
+    function StrengthMeter({poorPassword, weakPassword, strongPassword, passwordError}){
+        return (
+            <>
+            <ul className="list-group list-group-horizontal">
+               
+               {poorPassword===true?<li className="list-group-item bg-danger col-4" style={{padding:"1px 0px"}}></li>:''}
+                {weakPassword===true?<li className="list-group-item bg-warning col-4" style={{padding:"1px 0px"}}></li>:''}
+                {strongPassword===true?<li className="list-group-item bg-success col-4" style={{padding:"1px 0px"}}></li>:''}
+                
+          </ul>
+          <p> {passwordError}</p>
+          </>
+          
+        )
+    }
     const click = async () => {
         try {
             setError("") // Clear previous error messages
@@ -157,7 +171,7 @@ const Auth = observer(() => {
 />
 
 }
-
+<StrengthMeter poorPassword={poorPassword} weakPassword={weakPassword} strongPassword={strongPassword} passwordError={passwordError} />
                     {error && <Alert variant="danger" className="mt-3">{error}</Alert>}
                     <Form className="d-flex justify-content-between mt-3 pl-3 pr-3">
                         {isLogin ?
