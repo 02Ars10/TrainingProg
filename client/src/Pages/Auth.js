@@ -146,6 +146,7 @@ const Auth = observer(() => {
 
 :
 
+   <div>
 <Form.Control
    className="mt-3"
    placeholder="Введите ваш пароль..."
@@ -154,7 +155,8 @@ const Auth = observer(() => {
    onChange={e => setPassword(e.target.value)}
    type="password"
 />
- 
+    <StrengthMeter poorPassword={poorPassword} weakPassword={weakPassword} strongPassword={strongPassword} passwordError={passwordError} />
+ </div>
 }
 { isLogin ? 
 
@@ -171,7 +173,7 @@ const Auth = observer(() => {
 />
 
 }
-<StrengthMeter poorPassword={poorPassword} weakPassword={weakPassword} strongPassword={strongPassword} passwordError={passwordError} />
+
                     {error && <Alert variant="danger" className="mt-3">{error}</Alert>}
                     <Form className="d-flex justify-content-between mt-3 pl-3 pr-3">
                         {isLogin ?
