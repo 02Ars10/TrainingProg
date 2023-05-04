@@ -4,11 +4,11 @@ const roles = require('../enums/roles_ids');
 
 const User = sequelize.define('user', 
 {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    email: {type: DataTypes.STRING, unique: true},
-    password: {type: DataTypes.STRING},
-    role_id: {type:  DataTypes.INTEGER, defaultValue: roles.USER}, // USER ADMIN TEACHER
-    group_id:{type: DataTypes.INTEGER },
+    id: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
+    email: {type: DataTypes.STRING(1024), unique: true},
+    password: {type: DataTypes.STRING(1024)},
+    role_id: {type:  DataTypes.BIGINT, defaultValue: roles.USER}, // USER ADMIN TEACHER
+    group_id:{type: DataTypes.BIGINT },
     createdAt: {
         type: Sequelize.DataTypes.DATE,
         field: 'createdat',
@@ -21,7 +21,7 @@ const User = sequelize.define('user',
 
 const Role = sequelize.define('roles', 
 {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    id: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
     role_name: {type:  DataTypes.STRING(1024), defaultValue: 'USER'}, // USER ADMIN TEACHER
     createdAt: {
         type: Sequelize.DataTypes.DATE,
@@ -35,8 +35,8 @@ const Role = sequelize.define('roles',
 
 const Group = sequelize.define('groups', 
 {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    name:{type:  DataTypes.STRING, unique:true},
+    id: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
+    name:{type:  DataTypes.STRING(1024), unique:true},
     createdAt: {
         type: Sequelize.DataTypes.DATE,
         field: 'createdat',
@@ -49,8 +49,8 @@ const Group = sequelize.define('groups',
 
 const Tasks = sequelize.define('tasks', 
 {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
-    group_id: {type: DataTypes.INTEGER},
+    id: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true}, 
+    group_id: {type: DataTypes.BIGINT},
     description: {type: DataTypes.TEXT},
     inputs: {type: DataTypes.ARRAY(DataTypes.TEXT)}, // [[1, 2, 2], [abc]]
     outputs: {type: DataTypes.ARRAY(DataTypes.TEXT)},// [[2, 4, 4], [aabbcc]]
@@ -66,14 +66,14 @@ const Tasks = sequelize.define('tasks',
 
 const Solutions = sequelize.define('solutions', 
 {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    task_id: {type: DataTypes.INTEGER },
-    student_id: {type: DataTypes.INTEGER },
+    id: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
+    task_id: {type: DataTypes.BIGINT },
+    student_id: {type: DataTypes.BIGINT },
     tcode: {type: DataTypes.TEXT },
     input: {type: DataTypes.TEXT},
     output: {type: DataTypes.TEXT},
-    errors: {type: DataTypes.ARRAY(DataTypes.INTEGER)},
-    grade: {type: DataTypes.INTEGER },
+    errors: {type: DataTypes.ARRAY(DataTypes.BIGINT)},
+    grade: {type: DataTypes.BIGINT },
     comment: {type: DataTypes.TEXT},
     createdAt: {
         type: Sequelize.DataTypes.DATE,
@@ -108,11 +108,14 @@ Group.hasMany(Tasks, {foreignKey: 'group_id'});
 Solutions.belongsTo(Tasks, {foreignKey: 'task_id' , onDelete: 'cascade', onUpdate: 'cascade' });
 Solutions.belongsTo(User, {foreignKey: 'student_id'});
 
-Tasks.belongsTo(Group, {foreignKey: 'group_id'});
+Tasks.belongsTo(Group, {foreignKey: 'group_id', onDelete: 'cascade', onUpdate: 'cascade' });
 Tasks.hasMany(Solutions, {foreignKey: 'task_id', onDelete: 'cascade', onUpdate: 'cascade'});
 
+Group.sync();
 Role.sync();
 User.sync();
+Tasks.sync();
+Solutions.sync();
 module.exports = {
     User,
     Role,

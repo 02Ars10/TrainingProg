@@ -6,7 +6,7 @@ import {LOGIN_ROUTE, REGISTRATION_ROUTE, HOME_ROUTE} from "../utils/consts";
 import {registration, login} from '../http/userApi'
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
-
+import {StrengthMeter} from "../utils/StrengthMeter";
 const Auth = observer(() => {
     const {user} = useContext(Context)
     const location = useLocation()
@@ -15,7 +15,56 @@ const Auth = observer(() => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [password_2, setPassword_2] = useState('')
+    const [poorPassword, setPoorPassword] = useState(false);
+    const [weakPassword, setWeakPassword] = useState(false);
+    const [strongPassword, setStrongPassword] = useState(false);
+    const [passwordError, setPasswordErr] = useState("");
     const [error, setError] = useState('')
+    const passwordStrength= async (evnt)=>{
+        const passwordValue= evnt.target.value;
+        const passwordLength= passwordValue.length;
+        const poorRegExp = /[a-z]/;
+        const weakRegExp = /(?=.*?[0-9])/;;
+        const strongRegExp = /(?=.*?[#?!@$%^&*-])/;
+        const whitespaceRegExp = /^$|\s+/;
+        const poorPassword= poorRegExp.test(passwordValue);
+        const weakPassword= weakRegExp.test(passwordValue);
+        const strongPassword= strongRegExp.test(passwordValue);
+        const whiteSpace= whitespaceRegExp.test(passwordValue);
+    
+        if(passwordValue===''){
+            setPasswordErr("Password is Empty");
+        }else{
+    
+            // to check whitespace
+            if(whiteSpace){
+                setPasswordErr("Whitespaces are not allowed");
+            }
+            // to check poor password
+            if(passwordLength <= 3 && (poorPassword || weakPassword || strongPassword))
+            {
+            setPoorPassword(true);
+            setPasswordErr("Password is Poor");
+            }
+            // to check weak password
+            if(passwordLength>= 4 && poorPassword && (weakPassword || strongPassword))
+            {
+                setWeakPassword(true);
+                setPasswordErr("Password is Weak");
+            }else{
+            setWeakPassword(false);
+            }
+            // to check strong Password
+            if(passwordLength >= 6 && (poorPassword && weakPassword) && strongPassword)
+            {
+                setStrongPassword(true);
+                setPasswordErr("Password is Strong");
+            }else{
+               setStrongPassword(false);
+            }
+        }
+    }
+    
     const click = async () => {
         try {
             setError("") // Clear previous error messages
@@ -75,6 +124,7 @@ const Auth = observer(() => {
    className="mt-3"
    placeholder="Введите ваш пароль..."
    value={password}
+   onInput={passwordStrength}
    onChange={e => setPassword(e.target.value)}
    type="password"
 />

@@ -94,13 +94,15 @@ const Header = observer(() => {
             <>
             <Nav className="me-auto" >
               <button className='header__button'
+                            onClick={() => navigate(GROUPS_ROUTE)}>Список групп</button>
+              <button className='header__button'
                             onClick={() => navigate(TEACHER_ROUTE)}>Список студентов</button>
               <button className='header__button'
                             onClick={() => navigate(TASKS_ROUTE)}>Список заданий</button>
               <button className='header__button'
                             onClick={() => navigate(SOLUTIONS_ROUTE)}>Решения</button>
-              <button className='header__button'
-                            onClick={() => navigate(GROUPS_ROUTE)}>Список групп</button>
+                              <button className='header__button'
+                            onClick={() => navigate(ROOM_ROUTE)}>Чат</button>
             </Nav>
              <Form className="d-flex mx-auto">
              <FormControl
