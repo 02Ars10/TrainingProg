@@ -6,8 +6,7 @@ const fs = require('fs').promises;
 class TasksController {
     async getTaskList(req, res, next) { //Функция для получения всех заданий
         const tasks = await Tasks.findAll({order: [
-            ['createdAt']
-        
+            ['id', 'DESC']
         ]}) //Получем из бд все задания
         return res.json(tasks)
     }
