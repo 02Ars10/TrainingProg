@@ -28,9 +28,11 @@ const Auth = observer(() => {
                 setError("Пожалуйста, введите корректный email")
                 return;
             }
+            if (!isLogin) { 
             if (password !== password_2) {
                 setError('Пароли не совпадают')
                 return;
+            }
             }
             if (password.length < 6) {
                 setError("Пароль должен содержать не менее 6 символов")

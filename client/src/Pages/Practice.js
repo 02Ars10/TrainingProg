@@ -8,7 +8,7 @@ import {useContext, useEffect, useState} from "react";
 import { getTasksByGroup } from "../http/taskApi";
 import { observer } from "mobx-react-lite";
 import { Context } from "../index";
-import { createSolution } from "../http/solutionsApi";
+import { createSolution, getSolutionByUser } from "../http/solutionsApi";
 const Practice = observer(() => {
 
   const {user} = useContext(Context)
@@ -18,7 +18,9 @@ const Practice = observer(() => {
   const [input, setInput] = useState('');
   const [tasks, setTasks] = useState([]);
   const [current, setCurrent] = useState();
-  const [isError, setIsError] = useState([])
+  const [code, setCode] = useState();
+  const [value, setValue] = useState(code || "");
+  const [solutions, setSolutions] = useState([])
 
 
   const checkGroup = (user) => {
@@ -42,7 +44,20 @@ const Practice = observer(() => {
       setTasks(data)
       setCurrent(data[0])
   })
+    getSolutionByUser(checkUser(user)).then(data => {
+      setSolutions(data)
+    })
   },[])
+
+  useEffect(() => {
+    /*
+      setCurrentCode(data.find(item => item.task_id === current?.id)?.tcode)
+      console.log(current, data.find(item => item.task_id === current?.id)?.tcode)
+      console.log(code, value)
+      setCode(currentCode)
+      setValue(currentCode)*/
+ 
+  }, [current])
 
   const arrayFilter = (array) => {
     const newArray = [] 
@@ -89,37 +104,51 @@ const Practice = observer(() => {
   const sendAnswer = async (code) => {
     setOutput('')
     let firstOut
-    await axios.post('http://localhost:5000/compiler/compile',{program: code, input:input})
-    .then(res => {
-      firstOut = res.data.output
-      setOutput(res.data.output);
-      setError('');
+    let isAnswerExist
+    //Если в бд уже есть решение с этим task_id то не даем отправить
+    await getSolutionByUser(checkUser(user)).then(data => {
+      if (data.find(item => item.task_id === current.id) === undefined) {
+        isAnswerExist = false  
+      } else {
+        isAnswerExist = true
+      }
     })
-    .catch(err=>{
-      setError(err.response.data.error);
-      createSolution(current.id, checkUser(user), code, input, err.response.data.error)
-    })
-    await checkTest(code).then(res => {
-      createSolution(current.id, checkUser(user), code, input, firstOut, res)
+
+    if (!isAnswerExist) {
+      await axios.post('http://localhost:5000/compiler/compile',{program: code, input:input})
+      .then(res => {
+        firstOut = res.data.output
+        setOutput(res.data.output);
+        setError('');
+      })
+      .catch(err=>{
+        setError(err.response.data.error);
+        createSolution(current.id, checkUser(user), code, input, err.response.data.error)
+      })
+      await checkTest(code).then(res => {
+        createSolution(current.id, checkUser(user), code, input, firstOut, res)
+      })
+    } else {
+      setError("Ответ уже был отправлен")
     }
-    )
   }
 
   const handleEditorChange = (value) => {
     setValue(value);
   };
-  const [code, setCode] = useState(
-    `//write code`
-  );
-  const [value, setValue] = useState(code || "");
+  
 
   const handlePrevious = (e) => {
     const index = tasks.indexOf(current)
     e.stopPropagation()
     if (index === 0) {
       setCurrent(tasks[tasks.length - 1])
+      setCode((solutions.find(item => item.task_id === tasks[tasks.length - 1].id)?.tcode))
+      setValue((solutions.find(item => item.task_id === tasks[tasks.length - 1].id)?.tcode))
     } else
     setCurrent(tasks[index - 1])
+    setCode((solutions.find(item => item.task_id === tasks[index - 1].id)?.tcode))
+    setValue((solutions.find(item => item.task_id === tasks[index - 1].id)?.tcode))
   }
 
   const handleNext = (e) => {
@@ -127,8 +156,12 @@ const Practice = observer(() => {
     e.stopPropagation()
     if (index === tasks.length - 1) {
       setCurrent(tasks[0])
+      setCode((solutions.find(item => item.task_id === tasks[0].id)?.tcode))
+      setValue((solutions.find(item => item.task_id === tasks[0].id)?.tcode))
     } else
     setCurrent(tasks[index + 1])
+    setCode((solutions.find(item => item.task_id === tasks[index + 1].id)?.tcode))
+    setValue((solutions.find(item => item.task_id === tasks[index + 1].id)?.tcode))
   }
 
   return (
@@ -160,8 +193,8 @@ const Practice = observer(() => {
         width={`65%`}
         language={'cpp'}
         value={value}
-        defaultValue="// some comment"
         onChange={handleEditorChange}
+        defaultValue="//Start coding"
         theme={"vs-dark"}
       />
       <div className="output-wrapper">
@@ -197,12 +230,3 @@ const Practice = observer(() => {
 
 
 export default Practice
-
-
-/*
-#include <iostream> 
-int main() { int a,b;   
-std::cin >>a>>b; std::cout<<"Result: "<<a+b;  
-return 0;  
-} 
-*/

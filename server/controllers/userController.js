@@ -109,8 +109,7 @@ return res.json({ users }); //В ответе вернуть результат 
           ['id', 'DESC']
       ]},).catch(()=>{});
 
-        console.info('dxxxxxxxzxzzx');
-
+    
         return res.json({ users });
       }
 

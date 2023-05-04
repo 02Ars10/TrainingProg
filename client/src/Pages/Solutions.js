@@ -133,7 +133,7 @@ const Solutions = observer(() => {
         
         <div className="w-75 m-auto">
           <ListGroup>
-          { (current_user) && <p>Средняя оценка: {current_user}</p> }
+          {checkRole(user) === 'USER' && (current_user) && <h3>Средняя оценка: {current_user}</h3> }
 
 
               {solutions?.map((item, index) => {

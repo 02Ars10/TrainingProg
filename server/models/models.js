@@ -109,7 +109,7 @@ Solutions.belongsTo(Tasks, {foreignKey: 'task_id'});
 Solutions.belongsTo(User, {foreignKey: 'student_id'});
 
 Tasks.belongsTo(Group, {foreignKey: 'group_id'});
-Tasks.hasMany(Solutions, {foreignKey: 'task_id'});
+Tasks.hasMany(Solutions, {foreignKey: 'task_id', onDelete: 'cascade', onUpdate: 'cascade'});
 
 Role.sync();
 User.sync();
