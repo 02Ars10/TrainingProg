@@ -1,13 +1,15 @@
 
 import Auth from "./Pages/Auth";
 import Groups from "./Pages/Groups";
-import Guide from "./Pages/Guide";
+import Guide from "./Pages/Guide/Guide";
 import Practice from "./Pages/Practice";
 import Home from "./Pages/Home";
 import Test from "./Pages/Test";
 import Room from "./Pages/Room"
 import Chat from './Pages/Chat'
 import Tasks from './Pages/Tasks'
+import p11 from "./Pages/Guide/Pages/p11";
+import p12 from "./Pages/Guide/Pages/p12";
 import {
   HOME_ROUTE,
   PRACTICE_ROUTE,
@@ -21,7 +23,9 @@ import {
   TASKS_ROUTE,
   TEACHER_ROUTE,
   GROUPS_ROUTE,
-  SOLUTIONS_ROUTE
+  SOLUTIONS_ROUTE,
+  p11_ROUTE,
+  p12_ROUTE
 } from "./utils/consts";
 import CreateTeacher from "./Pages/CreateTeacher";
 import Teacher from "./Pages/Teacher";
@@ -81,5 +85,13 @@ export const publicRoutes = [
   {
     path: SOLUTIONS_ROUTE,
     Component: Solutions,
+  },
+  {
+    path: p11_ROUTE,
+    Component: p11,
+  },
+  {
+    path: p12_ROUTE,
+    Component: p12,
   },
 ];

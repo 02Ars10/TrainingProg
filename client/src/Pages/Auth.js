@@ -6,7 +6,8 @@ import {LOGIN_ROUTE, REGISTRATION_ROUTE, HOME_ROUTE} from "../utils/consts";
 import {registration, login} from '../http/userApi'
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
-
+import PasswordStrengthBar from 'react-password-strength-bar';
+import zxcvbn from 'zxcvbn';
 const Auth = observer(() => {
     const {user} = useContext(Context)
     const location = useLocation()
@@ -15,70 +16,86 @@ const Auth = observer(() => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [password_2, setPassword_2] = useState('')
-    const [poorPassword, setPoorPassword] = useState(false);
-    const [weakPassword, setWeakPassword] = useState(false);
-    const [strongPassword, setStrongPassword] = useState(false);
-    const [passwordError, setPasswordErr] = useState("");
+    // const [poorPassword, setPoorPassword] = useState(false);
+    // const [weakPassword, setWeakPassword] = useState(false);
+    // const [strongPassword, setStrongPassword] = useState(false);
+    // const [passwordError, setPasswordErr] = useState("");
     const [error, setError] = useState('')
-    const passwordStrength= async (evnt)=>{
-        const passwordValue= evnt.target.value;
-        const passwordLength= passwordValue.length;
-        const poorRegExp = /[a-z]/;
-        const weakRegExp = /(?=.*?[0-9])/;;
-        const strongRegExp = /(?=.*?[#?!@$%^&*-])/;
-        const whitespaceRegExp = /^$|\s+/;
-        const poorPassword= poorRegExp.test(passwordValue);
-        const weakPassword= weakRegExp.test(passwordValue);
-        const strongPassword= strongRegExp.test(passwordValue);
-        const whiteSpace= whitespaceRegExp.test(passwordValue);
+    const [showPassword, setShowPassword] = useState(false);
+    // const passwordStrength= async (evnt)=>{
+    //     const passwordValue= evnt.target.value;
+    //     const passwordLength= passwordValue.length;
+    //     const poorRegExp = /[a-z,а-я,A-Z,А-Я]/;
+    //     const weakRegExp = /(?=.*?[0-9])/;;
+    //     const strongRegExp = /(?=.*?[#?!@$%^&*-])/;
+    //     const whitespaceRegExp = /^$|\s+/;
+    //     const poorPassword= poorRegExp.test(passwordValue);
+    //     const weakPassword= weakRegExp.test(passwordValue);
+    //     const strongPassword= strongRegExp.test(passwordValue);
+    //     const whiteSpace= whitespaceRegExp.test(passwordValue);
 
-        if(passwordValue===''){
-            setPasswordErr("Password is Empty");
-        }else{
+    //     if(passwordValue===''){
+    //         setPasswordErr("Пароль пустой");
+    //     }else{
     
-            // to check whitespace
-            if(whiteSpace){
-                setPasswordErr("Whitespaces are not allowed");
-            }
-            // to check poor password
-            if(passwordLength <= 3 && (poorPassword || weakPassword || strongPassword))
-            {
-            setPoorPassword(true);
-            setPasswordErr("Password is Poor");
-            }
-            // to check weak password
-            if(passwordLength>= 4 && poorPassword && (weakPassword || strongPassword))
-            {
-                setWeakPassword(true);
-                setPasswordErr("Password is Weak");
-            }else{
-            setWeakPassword(false);
-            }
-            // to check strong Password
-            if(passwordLength >= 6 && (poorPassword && weakPassword) && strongPassword)
-            {
-                setStrongPassword(true);
-                setPasswordErr("Password is Strong");
-            }else{
-               setStrongPassword(false);
-            }
-        }
-    }
-    function StrengthMeter({poorPassword, weakPassword, strongPassword, passwordError}){
-        return (
-            <>
-            <ul className="list-group list-group-horizontal">
+    //         // to check whitespace
+    //         if(whiteSpace){
+    //             setPasswordErr("Пробелы не допускаются");
+    //         }
+    //         // to check poor password
+    //         if(passwordLength <= 3 && (poorPassword || weakPassword || strongPassword))
+    //         {
+    //         setPoorPassword(true);
+    //         setPasswordErr("Пароль слабый");
+    //         }
+    //         // to check weak password
+    //         if(passwordLength>= 4 && poorPassword && (weakPassword || strongPassword))
+    //         {
+    //             setWeakPassword(true);
+    //             setPasswordErr("Пароль недостаточно сложный");
+    //         }else{
+    //         setWeakPassword(false);
+    //         }
+    //         // to check strong Password
+    //         if(passwordLength >= 6 && (poorPassword && weakPassword) && strongPassword)
+    //         {
+    //             setStrongPassword(true);
+    //             setPasswordErr("Пароль надежный");
+    //         }else{
+    //            setStrongPassword(false);
+    //         }
+    //     }
+    // }
+    
+      
+      
+        const generatePassword = () => {
+            const length = Math.floor(Math.random() * 8) + 10;
+          const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+~`|}{[]:;?><,./-=';
+          let newPassword = '';
+          for (let i = 0, n = charset.length; i < length; ++i) {
+            newPassword += charset.charAt(Math.floor(Math.random() * n));
+          }
+          setPassword(newPassword);
+          setShowPassword(false);
+        };
+        const { score } = zxcvbn(password);
+    // function StrengthMeter({poorPassword, weakPassword, strongPassword, passwordError}){
+    //     return (
+    //         <>
+    //         <ul className="list-group list-group-horizontal">
                
-               {poorPassword===true?<li className="list-group-item bg-danger col-4" style={{padding:"1px 0px"}}></li>:''}
-                {weakPassword===true?<li className="list-group-item bg-warning col-4" style={{padding:"1px 0px"}}></li>:''}
-                {strongPassword===true?<li className="list-group-item bg-success col-4" style={{padding:"1px 0px"}}></li>:''}
+    //            {poorPassword===true?<li className="list-group-item bg-danger col-4" style={{padding:"1px 0px"}}></li>:''}
+    //             {weakPassword===true?<li className="list-group-item bg-warning col-4" style={{padding:"1px 0px"}}></li>:''}
+    //             {strongPassword===true?<li className="list-group-item bg-success col-4" style={{padding:"1px 0px"}}></li>:''}
                 
-          </ul>
-          <p> {passwordError}</p>
-          </>
+    //       </ul>
+    //       <p> {passwordError}</p>
+    //       </>
           
-        )
-    }
+    //     )
+    // }
+    
     const click = async () => {
         try {
             setError("") // Clear previous error messages
@@ -146,18 +163,18 @@ const Auth = observer(() => {
 
 :
 
-   <div>
+   
 <Form.Control
    className="mt-3"
    placeholder="Введите ваш пароль..."
    value={password}
-   onInput={passwordStrength}
-   onChange={e => setPassword(e.target.value)}
-   type="password"
+   onChange={(e) => setPassword(e.target.value)}
+   type={showPassword ? 'text' : 'password'}
 />
-    <StrengthMeter poorPassword={poorPassword} weakPassword={weakPassword} strongPassword={strongPassword} passwordError={passwordError} />
- </div>
 }
+
+ <PasswordStrengthBar password={password}  score={score}/>
+ 
 { isLogin ? 
 
 <div></div>
@@ -174,6 +191,15 @@ const Auth = observer(() => {
 
 }
 
+
+      <Button variant="secondary" onClick={generatePassword}>
+        Сгенерировать пароль
+      </Button>
+      <Button variant="secondary" onClick={() => setShowPassword(!showPassword)}>
+        {showPassword ? 'Скрыть пароль' : 'Показать пароль'}
+      </Button>
+
+{/* <StrengthMeter poorPassword={poorPassword} weakPassword={weakPassword} strongPassword={strongPassword} passwordError={passwordError} /> */}
                     {error && <Alert variant="danger" className="mt-3">{error}</Alert>}
                     <Form className="d-flex justify-content-between mt-3 pl-3 pr-3">
                         {isLogin ?

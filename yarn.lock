@@ -452,10 +452,25 @@
     "object-assign" "^4.1.1"
     "react-is" "^16.8.1"
 
+"react-dom@>=16.8.6":
+  "integrity" "sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g=="
+  "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-18.2.0.tgz"
+  "version" "18.2.0"
+  dependencies:
+    "loose-envify" "^1.1.0"
+    "scheduler" "^0.23.0"
+
 "react-is@^16.8.1":
   "integrity" "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ=="
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
   "version" "16.13.1"
+
+"react-password-strength-bar@^0.4.1":
+  "integrity" "sha512-2NvYz4IUU8k7KDZgsXKoJWreKCZLKGaqF5QhIVhc09OsPBFXFMh0BeghNkBIRkaxLeI7/xjivknDCYfluBCXKA=="
+  "resolved" "https://registry.npmjs.org/react-password-strength-bar/-/react-password-strength-bar-0.4.1.tgz"
+  "version" "0.4.1"
+  dependencies:
+    "zxcvbn" "4.4.2"
 
 "react-scroll-to-bottom@^4.2.0":
   "integrity" "sha512-1WweuumQc5JLzeAR81ykRdK/cEv9NlCPEm4vSwOGN1qS2qlpGVTyMgdI8Y7ZmaqRmzYBGV5/xPuJQtekYzQFGg=="
@@ -470,7 +485,7 @@
     "prop-types" "15.7.2"
     "simple-update-in" "2.2.0"
 
-"react@>= 16.8.6":
+"react@^18.2.0", "react@>= 16.8.6", "react@>=16.8.6":
   "integrity" "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   "version" "18.2.0"
@@ -495,6 +510,13 @@
     "is-core-module" "^2.9.0"
     "path-parse" "^1.0.7"
     "supports-preserve-symlinks-flag" "^1.0.0"
+
+"scheduler@^0.23.0":
+  "integrity" "sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw=="
+  "resolved" "https://registry.npmjs.org/scheduler/-/scheduler-0.23.0.tgz"
+  "version" "0.23.0"
+  dependencies:
+    "loose-envify" "^1.1.0"
 
 "simple-update-in@2.2.0":
   "integrity" "sha512-FrW41lLiOs82jKxwq39UrE1HDAHOvirKWk4Nv8tqnFFFknVbTxcHZzDS4vt02qqdU/5+KNsQHWzhKHznDBmrww=="
@@ -569,3 +591,8 @@
   "integrity" "sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg=="
   "resolved" "https://registry.npmjs.org/yaml/-/yaml-1.10.2.tgz"
   "version" "1.10.2"
+
+"zxcvbn@4.4.2":
+  "integrity" "sha512-Bq0B+ixT/DMyG8kgX2xWcI5jUvCwqrMxSFam7m0lAf78nf04hv6lNCsyLYdyYTrCVMqNDY/206K7eExYCeSyUQ=="
+  "resolved" "https://registry.npmjs.org/zxcvbn/-/zxcvbn-4.4.2.tgz"
+  "version" "4.4.2"

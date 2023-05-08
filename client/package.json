@@ -15,8 +15,8 @@
     "emoji-picker-react": "^4.4.7",
     "highlight.js": "^11.7.0",
     "highlightjs-line-numbers.js": "^2.8.0",
-    "jQuery": "^1.7.4",
     "jquery": "npm:jQuery@^1.7.4",
+    "jQuery": "^1.7.4",
     "jwt-decode": "^3.1.2",
     "mobx": "^6.7.0",
     "mobx-react-lite": "^3.4.0",
@@ -27,6 +27,7 @@
     "react-bootstrap": "^2.6.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
+    "react-password-strength-bar": "^0.4.1",
     "react-router": "^6.4.3",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
@@ -36,7 +37,8 @@
     "socket.io": "^4.6.1",
     "socket.io-client": "^4.6.1",
     "web-vitals": "^2.1.4",
-    "ws": "^8.12.1"
+    "ws": "^8.12.1",
+    "zxcvbn": "^4.4.2"
   },
   "scripts": {
     "start": "react-scripts start",
