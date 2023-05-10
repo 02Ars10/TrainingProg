@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import { Link } from "react-router-dom";
 import  '../assets/Room.css'
+import {Container, Card} from 'react-bootstrap'
 const FIELDS = {
   NAME: "name",
   ROOM: "room",
@@ -24,8 +25,13 @@ const Room = () => {
 
   return (
     <div className='wrap'>
+      <Container
+            className="d-flex justify-content-center align-items-center"
+            style={{height: window.innerHeight - 54}}
+        >
+          <Card style={{width: '600px',height: '350px'}} >
       <div className='chat__container'>
-        <h1 className='heading' style={{color:'black'}}>Присоединяйтесь к чату</h1>
+        <h1 className='themeable' style={{color:'black'}} >Присоединяйтесь к чату</h1>
 
         <form className='form'>
           <div className='group'>
@@ -33,7 +39,7 @@ const Room = () => {
               type="text"
               name="name"
               value={values[NAME]}
-              placeholder="Username"
+              placeholder="Имя пользоватея"
               className='input'
               onChange={handleChange}
               autoComplete="off"
@@ -44,7 +50,7 @@ const Room = () => {
             <input
               type="text"
               name="room"
-              placeholder="Room"
+              placeholder="Номер комнаты"
               value={values[ROOM]}
               className='input'
               onChange={handleChange}
@@ -64,6 +70,8 @@ const Room = () => {
           </Link>
         </form>
       </div>
+      </Card>
+      </Container>
     </div>
   );
 };

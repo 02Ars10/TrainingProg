@@ -208,14 +208,19 @@ const Practice = observer(() => {
         </div>
       </div>
     </div>
-      
-    <button onClick={()=>{sendCode(value)}}  className='btn btn-dark'>
+    <div style={{margin: '10px 5px'}}> 
+
+      <div  style={{ display: 'flex', justifyContent: 'space-between' }}>
+
+    <button onClick={()=>{sendCode(value)}}  className='btn btn-warning' style={{ width: '950px' }}>
       Проверить код
     </button>
-    <button onClick={()=>{sendAnswer(value)}}  className='btn btn-dark'>
+    <button onClick={()=>{sendAnswer(value)}}  className='btn btn-success' style={{ width: '600px' }}>
       Отправить решение преподавателю
     </button>
-    <input
+      </div>
+    <input 
+     style={{ color: "black",backgroundColor: 'lightslategrey',height: '50px' }}
     type="text"
     className="form-control"
     placeholder="Введите входные значения через пробел"
@@ -223,6 +228,8 @@ const Practice = observer(() => {
     value={input}
     onChange={(e)=>setInput(e.target.value)}
     />
+    </div>
+    
     </>
   )
 })

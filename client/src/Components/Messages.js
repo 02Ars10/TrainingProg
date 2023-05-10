@@ -3,6 +3,7 @@ import React from "react";
 import styles from "./Messages.module.css";
 
 const Messages = ({ messages, name }) => {
+  
   return (
     <div className={styles.messages}>
       {messages.map(({ user, message }, i) => {
@@ -17,7 +18,7 @@ const Messages = ({ messages, name }) => {
             <div className={styles.text}>{message}</div>
           </div>
         );
-      }).reverse()}
+      })}
     </div>
   );
 };

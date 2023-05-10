@@ -46,7 +46,7 @@ export default function SideBar() {
   ];
 
   return (
-    <div class="item left">
+    <div class="item left themeable">
       <ul id="browser" class="filetree">
         {mask.map((item) => (
           <SideBarItem item={item} />

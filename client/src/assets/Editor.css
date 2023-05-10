@@ -25,3 +25,6 @@
     background-color: #3c3c3c;
     margin-left: -1px;
 }
+.form-control::placeholder {
+    color: white; /* цвет названия placeholder */
+  }

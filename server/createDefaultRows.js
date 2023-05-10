@@ -4,8 +4,8 @@ const { User, Role } = require('./models/models');
 const sequelize = require('./db');
 const roles = require('./enums/roles_ids');
 
-const email = 'admin';
-const password = 'admin';
+const email = 'admin@admin.ru';
+const password = 'admin123';
 
 console.info(email);
 console.info(password);

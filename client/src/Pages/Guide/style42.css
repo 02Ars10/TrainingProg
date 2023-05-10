@@ -55,10 +55,16 @@ font-weight: 700;
 	background: #ccc;
 }
 .item.center {
-	background-color: #F7F7FA;
+	background: #F7F7FA;
+}
+.dark .item.center {
+	background-color: #252526;
 }
 .item.left {
-	background-color:#f0f0f0;
+	background:#f0f0f0;
+}
+.dark .item.left {
+	background-color: #252526;
 }
 #container {display: flex;flex-direction: column;width: 100%;word-wrap: break-word;background-color:var(--container-bg-color);}
 

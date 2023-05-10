@@ -6,6 +6,7 @@ import { ROOM_ROUTE, HOME_ROUTE, LOGIN_ROUTE, PRACTICE_ROUTE, GUIDE_ROUTE, ADMIN
 import { observer } from "mobx-react-lite";
 import { Context } from "..";
 import { useNavigate } from "react-router-dom";
+import BtnDarkMode from "./btnDarkMode/BtnDarkMode";
 import '../assets/Header.css'
 
 const Header = observer(() => {
@@ -62,15 +63,7 @@ const Header = observer(() => {
                               <button className='header__button'
                             onClick={() => navigate(ROOM_ROUTE)}>Чат</button>
             </Nav>
-             <Form className="d-flex mx-auto">
-             <FormControl
-               type="search"
-               placeholder="Поиск"
-               className="me-2"
-               aria-label="Search"
-             />
-             <Button variant="outline-success">Поиск</Button>
-           </Form>
+             
            </>
            ||
            user._user.role === 'ADMIN' &&
@@ -78,16 +71,9 @@ const Header = observer(() => {
             <Nav className="me-auto" >
               <button className='header__button'
                             onClick={() => navigate(ADMIN_ROUTE)}>Новый преподаватель</button>
+                          
             </Nav>
-             <Form className="d-flex mx-auto">
-             <FormControl
-               type="search"
-               placeholder="Поиск"
-               className="me-2"
-               aria-label="Search"
-             />
-             <Button variant="outline-success">Поиск</Button>
-           </Form>
+           
            </>
            ||
            user._user.role === 'TEACHER' &&
@@ -103,16 +89,9 @@ const Header = observer(() => {
                             onClick={() => navigate(SOLUTIONS_ROUTE)}>Решения</button>
                               <button className='header__button'
                             onClick={() => navigate(ROOM_ROUTE)}>Чат</button>
+                             
             </Nav>
-             <Form className="d-flex mx-auto">
-             <FormControl
-               type="search"
-               placeholder="Поиск"
-               className="me-2"
-               aria-label="Search"
-             />
-             <Button variant="outline-success">Поиск</Button>
-           </Form>
+             
            </>
            :
            <></>
@@ -123,7 +102,8 @@ const Header = observer(() => {
           </Navbar.Collapse>
           {user.isAuth ?
                 <div className="mx-auto d-grid gap-2 d-md-flex justify-content-md-end">
-            {checkUser(user) ? <div className="email">{checkUser(user)}</div> : <div className="email"></div>}
+            {checkUser(user) ? <div className="email" style={{margin: '5px 0px', fontSize: '20px', color: '#FFD700'}}>{checkUser(user)}</div> : <div className="email" ></div>
+}<BtnDarkMode margin="5px 20px" />
 
               <Button variant="outline-light" onClick={() => logOut()}>Выйти</Button>
               </div>
@@ -132,6 +112,7 @@ const Header = observer(() => {
 <div className="mx-auto d-grid gap-2 d-md-flex justify-content-md-end">
 
 <Button  variant="outline-light" onClick={() => history(LOGIN_ROUTE)}>Авторизация</Button>
+<BtnDarkMode margin="5px 20px" />
                 </div>
               }
         </Container>

@@ -1,7 +1,6 @@
 
 import './App.css';
 import Header from './Components/Header';
-import Footer from './Components/Footer';
 import { BrowserRouter } from 'react-router-dom';
 import AppRouter from './Components/AppRouter';
 import { observer } from 'mobx-react-lite';
@@ -37,7 +36,7 @@ const App = observer(() => {
 				<AppRouter />
 				
     
-				<Footer/>
+				
     </BrowserRouter>
    
     

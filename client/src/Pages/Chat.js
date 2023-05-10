@@ -5,11 +5,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useRef } from "react";
 import EmojiPicker from "emoji-picker-react";
 import '../assets/Chat.css'
-import ScrollToBottom from 'react-scroll-to-bottom'
 import Messages from "../Components/Messages";
 import icon from '../assets/emoji.svg'
 const socket = io.connect('http://localhost:5000');
 const Chat = () => {
+  const messagesEndRef = useRef(null);
   const { search } = useLocation();
   const navigate = useNavigate();
   const [params, setParams] = useState({ room: "", user: "" });
@@ -32,6 +32,10 @@ const Chat = () => {
       setUsers(users.length);
     });
   }, []);
+  useEffect(() => {
+    // Scroll to the bottom of the messages container
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [state]);
   const leftRoom = () => {
     socket.emit("leftRoom", { params });
     navigate("/room");
@@ -61,9 +65,12 @@ const Chat = () => {
           Покинуть комнату
         </button>
       </div>
-      <div  className='chat__messages'>
-        <Messages messages={state} name={params.name}/>
-    
+      
+      
+      <div className='chat__messages'>
+      <Messages messages={state} name={params.name}/>
+      <div ref={messagesEndRef} />
+   
        
       </div>
       <form className='chat__form'onSubmit={handleSubmit}>
@@ -71,7 +78,7 @@ const Chat = () => {
           <input
             type="text"
             name="message"
-            placeholder="What do you want to say?"
+            placeholder="Что вы хотите сказать?"
             value={message}
             onChange={handleChange}
             autoComplete="off"
@@ -89,7 +96,7 @@ const Chat = () => {
         </div>
 
         <div className='chat__button'>
-          <input type="submit"  onSubmit={handleSubmit} value="Send a message" />
+          <input type="submit"  onSubmit={handleSubmit} value="Отправить сообщение" />
         </div>
       </form>
     </div>
