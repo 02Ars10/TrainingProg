@@ -58,7 +58,7 @@ const CreateTeacher = observer(() => {
         setError('Пароль должен содержать не менее 6 символов');
         return;
       }
-      let data = await addTeacher(email.value,password.value);
+      let data = await addTeacher(email,password);
       
       if (data) {
         setSuccessMessage('Преподаватель успешно добавлен');
@@ -80,7 +80,7 @@ const CreateTeacher = observer(() => {
         </h2>
         <input
           className="input__auth mt-3"
-          placeholder="Введите ваш email..."
+          placeholder="Введите email преподавателя..."
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -89,7 +89,7 @@ const CreateTeacher = observer(() => {
           <div>
             <input
               className="input__auth mt-3"
-              placeholder="Введите ваш пароль..."
+              placeholder="Введите пароль преподавателя..."
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               type={showPassword ? "text" : "password"}
@@ -100,7 +100,7 @@ const CreateTeacher = observer(() => {
        
           <input
             className="input__auth mt-3"
-            placeholder="Повторите ваш пароль..."
+            placeholder="Повторите пароль преподавателя..."
             value={password_2}
             onChange={(e) => setPassword_2(e.target.value)}
             type="password"

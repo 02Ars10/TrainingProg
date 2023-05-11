@@ -69,8 +69,6 @@ const Practice = observer(() => {
 
   const sendCode = async(code)=>{
     setOutput('')
-    console.log(arrayFilter(current.inputs))
-    console.log(arrayFilter(current.outputs))
     await axios.post('http://localhost:5000/compiler/compile',{program: code, input:input})
     .then(res => {
       setOutput(res.data.output);
