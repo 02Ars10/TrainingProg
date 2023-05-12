@@ -103,7 +103,7 @@ User.hasMany(Solutions, {foreignKey: 'student_id'});
 Role.belongsTo(User, {foreignKey: 'user_id'});
 
 Group.belongsTo(User, {foreignKey: 'group_id'})
-Group.hasMany(Tasks, {foreignKey: 'group_id'});
+Group.hasMany(Tasks, {foreignKey: 'group_id' ,onDelete: 'cascade', onUpdate: 'cascade'});
 
 Solutions.belongsTo(Tasks, {foreignKey: 'task_id' , onDelete: 'cascade', onUpdate: 'cascade' });
 Solutions.belongsTo(User, {foreignKey: 'student_id'});

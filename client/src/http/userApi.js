@@ -28,11 +28,9 @@ export const get_user_by_id = async (user_id) => {
 }
 export const addTeacher = async (email, password) => {
     const token = localStorage.getItem('token');
-    try {
-      const response = await $authHost.post('teacher/registration', {email, password, token});
-      const {data} = response;
-      return {status: response.status, token: jwt_decode(data.token), role: data.role};
-    } catch (error) {
-      return {status: error.response.status};
-    }
+        await $authHost.post('teacher/registration', {email, password, token}).then(res => {
+            return {status: res.status, token: jwt_decode(res.token), role: res.role}
+        }).catch(e => {
+            return {status: e.response.status}
+        })
   }
